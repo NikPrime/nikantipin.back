@@ -43,5 +43,5 @@ jobs:
                 docker stop ${{ secrets.CONTAINER_NAME }} || true
                 docker container rm ${{ secrets.CONTAINER_NAME }} || true
                 docker image rm -f ${{ secrets.IMAGE_NAME }} || true
-                docker-compose up -d
+                docker run -d --name backend --publish 3000:3000 nikprime/nikantipin.back:master
             
