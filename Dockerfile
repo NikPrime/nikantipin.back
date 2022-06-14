@@ -11,4 +11,6 @@ RUN npm install @nestjs/cli
 
 COPY . .
 
+RUN npm run migration:run
+
 CMD ["npm", "run", "start"]

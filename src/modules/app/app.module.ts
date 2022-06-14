@@ -3,6 +3,7 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { TypeOrmModule } from "@nestjs/typeorm";
 import { ConfigModule } from "@nestjs/config";
+import { AdminModule } from '../admin/admin.module'
 
 @Module({
   imports: [
@@ -15,8 +16,10 @@ import { ConfigModule } from "@nestjs/config";
     password: process.env.POSTGRES_PASSWORD || 'password',
     database: process.env.POSTGRES_DATABASE || 'nikantipin',
     entities: ["dist/**/**.entity{.ts,.js}"],
-    synchronize: false,
-  }),],
+    autoLoadEntities: true,
+  }),
+    AdminModule
+  ],
   controllers: [AppController],
   providers: [AppService],
 })
