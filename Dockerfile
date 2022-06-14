@@ -11,5 +11,4 @@ RUN npm install @nestjs/cli
 RUN npm run migrations:run
 
 COPY . .
-
-CMD ["npm", "run", "start"]
+CMD ["sh", ".github/workflows/entrypoint.sh"]
