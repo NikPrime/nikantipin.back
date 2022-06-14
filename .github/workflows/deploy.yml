@@ -44,4 +44,6 @@ jobs:
                 docker container rm ${{ secrets.CONTAINER_NAME }} || true
                 docker image rm -f ${{ secrets.IMAGE_NAME }} || true
                 docker run -d --name backend --publish 3000:3000 --env POSTGRES_HOST=${{ secrets.POSTGRES_HOST }} --env POSTGRES_PASSWORD=${{ secrets.POSTGRES_PASSWORD }} --env POSTGRES_DATABASE=${{ secrets.POSTGRES_DATABASE }} --env POSTGRES_PORT=${{ secrets.POSTGRES_PORT }} --env POSTGRES_USERNAME=${{ secrets.POSTGRES_USERNAME }} nikprime/nikantipin.back:master
+                docker exec -it backend sh
+                npm run migrations
             

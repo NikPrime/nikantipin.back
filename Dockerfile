@@ -8,7 +8,6 @@ COPY package*.json ./
 
 RUN npm install
 RUN npm install @nestjs/cli
-RUN npm run migrations:run
 
 COPY . .
 CMD ["sh", ".github/workflows/entrypoint.sh"]
