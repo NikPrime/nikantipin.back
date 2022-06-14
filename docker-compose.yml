@@ -1,0 +1,13 @@
+version: '1'
+services:
+  backend:
+    image: nikprime/nikantipin.back:master
+    container_name: backend
+    ports:
+      - 3000:3000
+    environment:
+      POSTGRES_HOST: ${{ env.POSTGRES_HOST }}
+      POSTGRES_PORT: ${{ env.POSTGRES_PORT }}
+      POSTGRES_USERNAME: ${{ env.POSTGRES_USERNAME }}
+      POSTGRES_PASSWORD: ${{ env.POSTGRES_PASSWORD }}
+      POSTGRES_DATABASE: ${{ env.POSTGRES_DATABASE }}
