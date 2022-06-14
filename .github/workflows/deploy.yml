@@ -43,5 +43,12 @@ jobs:
                 docker stop ${{ secrets.CONTAINER_NAME }} || true
                 docker container rm ${{ secrets.CONTAINER_NAME }} || true
                 docker image rm -f ${{ secrets.IMAGE_NAME }} || true
-                docker-compose up backend
+                docker run
+                  -d --name backend --publish 3000:3000
+                  --env POSTGRES_HOST=${{ POSTGRES_HOST }}
+                  --env POSTGRES_PASSWORD=${{ POSTGRES_PASSWORD }}
+                  --env POSTGRES_DATABASE=${{ POSTGRES_DATABASE }}
+                  --env POSTGRES_PORT=${{ POSTGRES_PORT }}
+                  --env POSTGRES_USERNAME=${{ POSTGRES_USERNAME }}
+                  nikprime/nikantipin.back:master
             
