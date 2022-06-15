@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { BadRequestException, Injectable } from '@nestjs/common';
 import { AdminRegisterDto } from './admin.dto';
 import { Repository } from 'typeorm';
 import { Admin } from './admin.entity';
@@ -9,10 +9,14 @@ import * as bcrypt from 'bcrypt';
 export class AdminService {
     constructor(
         @InjectRepository(Admin)
-        private userRepository: Repository<Admin>,
+        private adminRepository: Repository<Admin>,
     ) {}
 
     async login(data: AdminRegisterDto) {
-        const hashPassword = await bcrypt.hash(data.password, 10);
+        const admin = await this.adminRepository.findOne({ where: { email: data.email } });
+        const isPasswordCorrect = await bcrypt.compare(data.password, admin.password);
+        if (!admin || !isPasswordCorrect) throw new BadRequestException('Incorrect username or password');
+
+        return { success: true };
     }
 }

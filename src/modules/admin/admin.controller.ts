@@ -13,6 +13,6 @@ export class AdminController {
         status: 200,
     })
     async login(@Body() registerDto: AdminRegisterDto) {
-        this.adminService.login(registerDto);
+        return this.adminService.login(registerDto);
     }
 }
