@@ -8,7 +8,7 @@ module.exports = {
 
   jsxSingleQuote: true,
 
-  tabWidth: 2,
+  tabWidth: 4,
   endOfLine: 'auto',
   trailingComma: 'all',
 };

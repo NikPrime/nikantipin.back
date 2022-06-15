@@ -5,15 +5,14 @@ import { AdminRegisterDto } from './admin.dto';
 
 @Controller('admin')
 export class AdminController {
-  constructor(private readonly adminService: AdminService) {}
+    constructor(private readonly adminService: AdminService) {}
 
-  @Post('login')
-  @HttpCode(HttpStatus.OK)
-  @ApiResponse({
-    status: 200,
-  })
-  async login(@Body() registerDto: AdminRegisterDto) {
-    this.adminService.login(registerDto);
-  }
-
+    @Post('login')
+    @HttpCode(HttpStatus.OK)
+    @ApiResponse({
+        status: 200,
+    })
+    async login(@Body() registerDto: AdminRegisterDto) {
+        this.adminService.login(registerDto);
+    }
 }
