@@ -10,4 +10,4 @@ RUN npm install
 RUN npm install @nestjs/cli
 
 COPY . .
-CMD ["sh", ".github/workflows/entrypoint.sh"]
+CMD ["npm", "run", "start"]
