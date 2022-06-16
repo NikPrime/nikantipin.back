@@ -4,12 +4,14 @@ import { Repository } from 'typeorm';
 import { Admin } from './admin.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import * as bcrypt from 'bcrypt';
+import { TokensService } from '../tokens/tokens.service';
 
 @Injectable()
 export class AdminService {
     constructor(
         @InjectRepository(Admin)
         private adminRepository: Repository<Admin>,
+        private tokensService: TokensService,
     ) {}
 
     async login(data: AdminRegisterDto) {
@@ -17,6 +19,7 @@ export class AdminService {
         const isPasswordCorrect = await bcrypt.compare(data.password, admin.password);
         if (!admin || !isPasswordCorrect) throw new BadRequestException('Incorrect username or password');
 
-        return { success: true };
+        const token = await this.tokensService.generateToken(Number(admin.id));
+        return { data: { token } };
     }
 }

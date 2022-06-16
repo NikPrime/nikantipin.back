@@ -3,7 +3,8 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule } from '@nestjs/config';
-import { AdminModule } from '../admin/admin.module';
+import { AdminModule } from '../admins/admin.module';
+import { TokensModule } from '../tokens/tokens.module';
 
 @Module({
     imports: [
@@ -19,6 +20,7 @@ import { AdminModule } from '../admin/admin.module';
             autoLoadEntities: true,
         }),
         AdminModule,
+        TokensModule,
     ],
     controllers: [AppController],
     providers: [AppService],
