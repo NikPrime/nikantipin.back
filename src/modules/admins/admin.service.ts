@@ -20,6 +20,6 @@ export class AdminService {
         if (!admin || !isPasswordCorrect) throw new BadRequestException('Incorrect username or password');
 
         const token = await this.tokensService.generateToken(Number(admin.id));
-        return token;
+        return { token };
     }
 }
