@@ -1,7 +1,8 @@
-import { Body, Controller, Delete, Get, HttpCode, HttpStatus, Param, Patch, Post } from '@nestjs/common';
+import {Body, Controller, Delete, Get, HttpCode, HttpStatus, Param, Patch, Post, UseGuards} from '@nestjs/common';
 import { ArticlesService } from './articles.service';
-import { ApiResponse } from "@nestjs/swagger";
-import { ArticleDto } from "./articles.dto";
+import { ApiResponse } from '@nestjs/swagger';
+import { ArticleDto } from './articles.dto';
+import { JwtGuard } from '../../auth/jwt-guard';
 
 @Controller('articles')
 export class ArticlesController {
@@ -16,6 +17,7 @@ export class ArticlesController {
     return this.articlesService.getArticleById(articleId);
   }
 
+  @UseGuards(JwtGuard)
   @Post()
   @HttpCode(HttpStatus.OK)
   @ApiResponse({
@@ -25,6 +27,7 @@ export class ArticlesController {
     return this.articlesService.saveArticle(article);
   }
 
+  @UseGuards(JwtGuard)
   @Patch(':id')
   @HttpCode(HttpStatus.OK)
   @ApiResponse({
@@ -34,6 +37,7 @@ export class ArticlesController {
     return this.articlesService.updateArticleById(articleId);
   }
 
+  @UseGuards(JwtGuard)
   @Delete(':id')
   @HttpCode(HttpStatus.OK)
   @ApiResponse({

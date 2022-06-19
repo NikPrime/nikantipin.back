@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { sign, verify } from 'jsonwebtoken';
+import { adminTokenDecodeDto } from '../../dto/out';
 
 @Injectable()
 export class TokensService {
@@ -22,7 +23,7 @@ export class TokensService {
         });
     }
 
-    async verifyToken(token: string) {
+    async verifyToken(token: string): Promise<adminTokenDecodeDto> {
         return new Promise((resolve, reject) => {
             const jwtSecretKey = this.getSecretKey();
             return verify(token, jwtSecretKey, (err, data) => {
@@ -30,5 +31,11 @@ export class TokensService {
                 resolve(data);
             });
         });
+    }
+
+    async refreshToken(token: string) {
+        const data = await this.verifyToken(token);
+        const access = await this.generateToken(Number(data.adminId));
+        return { token: access };
     }
 }

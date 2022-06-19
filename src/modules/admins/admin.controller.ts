@@ -1,7 +1,8 @@
-import { Body, Controller, HttpCode, HttpStatus, Post } from '@nestjs/common';
+import {Body, Controller, HttpCode, HttpStatus, Post, Res} from '@nestjs/common';
 import { ApiResponse } from '@nestjs/swagger';
 import { AdminService } from './admin.service';
 import { AdminRegisterDto } from './admin.dto';
+import { Response } from 'express';
 
 @Controller('admin')
 export class AdminController {
@@ -12,7 +13,12 @@ export class AdminController {
     @ApiResponse({
         status: 200,
     })
-    async login(@Body() registerDto: AdminRegisterDto) {
-        return this.adminService.login(registerDto);
+    async login(@Body() registerDto: AdminRegisterDto, @Res() res: Response) {
+        const result = await this.adminService.login(registerDto);
+        res.cookie('x-access-token', result.token, {
+            httpOnly: true,
+        });
+
+        return res.send(result);
     }
 }

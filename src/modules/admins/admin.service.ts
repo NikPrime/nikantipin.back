@@ -1,4 +1,4 @@
-import { BadRequestException, Injectable } from '@nestjs/common';
+import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
 import { AdminRegisterDto } from './admin.dto';
 import { Repository } from 'typeorm';
 import { Admin } from './admin.entity';
@@ -21,5 +21,12 @@ export class AdminService {
 
         const token = await this.tokensService.generateToken(Number(admin.id));
         return { token };
+    }
+
+    async getOne(query: Record<string, unknown>) {
+        const admin = await this.adminRepository.findOne({ where: query });
+        if (!admin) throw new NotFoundException('User not found');
+
+        return { admin };
     }
 }

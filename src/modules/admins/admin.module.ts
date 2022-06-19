@@ -9,5 +9,6 @@ import { TokensModule } from '../tokens/tokens.module';
     imports: [TypeOrmModule.forFeature([Admin]), TokensModule],
     controllers: [AdminController],
     providers: [AdminService],
+    exports: [AdminService],
 })
 export class AdminModule {}

@@ -1,11 +1,14 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './modules/app/app.module'
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
+import * as cookieParser from 'cookie-parser';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   app.enableCors();
   app.setGlobalPrefix('api');
+
+  app.use(cookieParser());
 
   const swaggerConfig = new DocumentBuilder()
       .setTitle('Nikantipin api')
