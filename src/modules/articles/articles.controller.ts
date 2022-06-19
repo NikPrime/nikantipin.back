@@ -1,8 +1,21 @@
-import {Body, Controller, Delete, Get, HttpCode, HttpStatus, Param, Patch, Post, UseGuards} from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  HttpCode,
+  HttpStatus,
+  Param,
+  Patch,
+  Post,
+  Query,
+  UseGuards
+} from '@nestjs/common';
 import { ArticlesService } from './articles.service';
 import { ApiResponse } from '@nestjs/swagger';
-import { ArticleDto } from './articles.dto';
+import { ArticleDto, GetArticlesListQueryDto } from './articles.dto';
 import { JwtGuard } from '../../auth/jwt-guard';
+import { PaginationQueryDto } from '../../dto/in';
 
 @Controller('articles')
 export class ArticlesController {
@@ -45,5 +58,10 @@ export class ArticlesController {
   })
   async deleteArticleById(@Param('id') articleId: string) {
     return this.articlesService.deleteArticleById(articleId);
+  }
+
+  @Get()
+  async getArticles(@Query() query: GetArticlesListQueryDto, @Query() pagination: PaginationQueryDto) {
+    return await this.articlesService.getArticles(query, pagination);
   }
 }

@@ -3,3 +3,10 @@ export interface adminTokenDecodeDto {
     iat: number;
     exp: number;
 }
+
+export interface MetaData {
+    page: number;
+    limit: number;
+    pages: number;
+    total: number;
+}

@@ -1,5 +1,5 @@
-import { ApiProperty } from "@nestjs/swagger";
-import { IsEmail, IsNotEmpty, IsString } from 'class-validator';
+import { ApiProperty } from '@nestjs/swagger';
+import { IsEmail, IsNotEmpty, IsOptional, IsString } from 'class-validator';
 import { ArticleType } from './articles.entity';
 
 export class ArticleDto {
@@ -17,4 +17,10 @@ export class ArticleDto {
     @IsNotEmpty()
     @IsString()
     type: ArticleType;
+}
+
+export class GetArticlesListQueryDto {
+    @ApiProperty({ description: '', required: false })
+    @IsOptional()
+    type?: string;
 }
