@@ -3,7 +3,7 @@ import { ApiResponse } from '@nestjs/swagger';
 import { AdminService } from './admin.service';
 import { AdminRegisterDto } from './admin.dto';
 import { Response } from 'express';
-import {JwtGuard} from "../../auth/jwt-guard";
+import { JwtGuard } from "../../auth/jwt-guard";
 
 @Controller('admin')
 export class AdminController {
