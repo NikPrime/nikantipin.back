@@ -1,8 +1,9 @@
-import {Body, Controller, HttpCode, HttpStatus, Post, Res} from '@nestjs/common';
+import { Body, Controller, Get, HttpCode, HttpStatus, Post, Res, UseGuards } from '@nestjs/common';
 import { ApiResponse } from '@nestjs/swagger';
 import { AdminService } from './admin.service';
 import { AdminRegisterDto } from './admin.dto';
 import { Response } from 'express';
+import {JwtGuard} from "../../auth/jwt-guard";
 
 @Controller('admin')
 export class AdminController {
@@ -20,5 +21,12 @@ export class AdminController {
         });
 
         return res.send(result);
+    }
+
+    @UseGuards(JwtGuard)
+    @Get('auth')
+    @HttpCode(HttpStatus.OK)
+    async checkAuth() {
+      return { success: true }
     }
 }
