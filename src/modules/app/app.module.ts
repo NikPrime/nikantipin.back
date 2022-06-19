@@ -5,6 +5,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule } from '@nestjs/config';
 import { AdminModule } from '../admins/admin.module';
 import { TokensModule } from '../tokens/tokens.module';
+import { ArticlesModule } from "../articles/articles.module";
 
 @Module({
     imports: [
@@ -21,6 +22,7 @@ import { TokensModule } from '../tokens/tokens.module';
         }),
         AdminModule,
         TokensModule,
+        ArticlesModule,
     ],
     controllers: [AppController],
     providers: [AppService],
