@@ -1,4 +1,4 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn } from 'typeorm';
 
 export type ArticleType = 'blog' | 'tech' | 'algo';
 
@@ -15,4 +15,10 @@ export class Article {
 
     @Column()
     type: ArticleType;
+
+    @Column({ name: 'image_url' })
+    imageUrl: string;
+
+    @CreateDateColumn({ name: 'created_at' })
+    createdAt: Date;
 }

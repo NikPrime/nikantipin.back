@@ -1,5 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsEmail, IsNotEmpty, IsOptional, IsString } from 'class-validator';
+import { IsDate, IsEmail, IsNotEmpty, IsOptional, IsString } from 'class-validator';
 import { ArticleType } from './articles.entity';
 
 export class ArticleDto {
@@ -17,6 +17,16 @@ export class ArticleDto {
     @IsNotEmpty()
     @IsString()
     type: ArticleType;
+
+    @ApiProperty()
+    @IsNotEmpty()
+    @IsString()
+    imageUrl: string;
+
+    @ApiProperty()
+    @IsNotEmpty()
+    @IsDate()
+    createdAt: string;
 }
 
 export class GetArticlesListQueryDto {
