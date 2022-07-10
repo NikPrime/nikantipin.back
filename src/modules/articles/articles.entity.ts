@@ -21,4 +21,7 @@ export class Article {
 
     @CreateDateColumn({ name: 'created_at' })
     createdAt: Date;
+
+    @Column({ name: 'short_id' })
+    shortId: string;
 }

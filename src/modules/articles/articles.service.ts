@@ -5,6 +5,7 @@ import { Repository } from 'typeorm';
 import { Article } from './articles.entity';
 import { PaginationQueryDto } from '../../dto/in';
 import { getPagination, paginationParams } from '../../libs/pagination';
+import { generate } from 'shortid';
 
 @Injectable()
 export class ArticlesService {
@@ -15,7 +16,9 @@ export class ArticlesService {
     }
     async saveArticle(article: ArticleDto) {
         try {
-            await this.articleRepository.insert(article);
+            const shortId = generate();
+
+            await this.articleRepository.insert({ ...article, shortId });
             return { success: true };
         } catch(e) {
             throw new BadRequestException(e.message)

@@ -27,6 +27,10 @@ export class ArticleDto {
     @IsNotEmpty()
     @IsDate()
     createdAt: string;
+
+    @ApiProperty()
+    @IsString()
+    shortId: string;
 }
 
 export class GetArticlesListQueryDto {
