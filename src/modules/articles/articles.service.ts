@@ -27,7 +27,7 @@ export class ArticlesService {
 
     async getArticleById(articleId: string) {
         try {
-            const article = await this.articleRepository.findOne({ where: { id: articleId } });
+            const article = await this.articleRepository.findOne({ where: { shortId: articleId } });
             if (!article) throw new NotFoundException('Article doesn\'t exists');
 
             return { data: { article }, meta: {} };
